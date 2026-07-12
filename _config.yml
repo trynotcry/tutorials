@@ -1,7 +1,7 @@
 title: "Dwa konta GitHub, jeden komputer"
 description: "Instrukcja krok po kroku: jak skonfigurować git i SSH tak, by push trafiał na właściwe konto GitHub w zależności od katalogu."
-baseurl: "/tutorials" # jeśli publikujesz pod https://user.github.io/repo/ ustaw tu "/repo"
-url: "https://trynotcry.github.io/tutorials/"     # np. "https://user.github.io"
+baseurl: "" # jeśli publikujesz pod https://user.github.io/repo/ ustaw tu "/repo"
+url: "https://tutorials.mb-idea.co.uk/"     # np. "https://user.github.io"
 
 # --- To jest serce automatyzacji ---
 # Każdy plik .md wrzucony do folderu _guides/ jest automatycznie
