@@ -1,0 +1,19 @@
+{% assign lang = page.lang | default: "pl" %}
+{% assign topic_names = site.guides | where: "lang", lang | map: "topic" | uniq %}
+<nav class="sidenav-list">
+  <p class="sidenav-title">{% if lang == "en" %}All guides{% else %}Spis treści{% endif %}</p>
+  {% for topic in topic_names %}
+    {% assign topic_guides = site.guides | where: "topic", topic | where: "lang", lang | sort: "order" %}
+    {% assign t = topic_guides | first %}
+    <div class="sidenav-topic">
+      <p class="sidenav-topic-title">{{ t.topic_title }}</p>
+      <ul>
+        {% for g in topic_guides %}
+        <li{% if g.url == page.url %} class="active"{% endif %}>
+          <a href="{{ g.url | relative_url }}">{{ g.title }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+</nav>

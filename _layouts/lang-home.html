@@ -1,0 +1,28 @@
+---
+layout: default
+---
+<section class="hero">
+  <div class="eyebrow">tutorial</div>
+  <h1>{{ page.title }}</h1>
+  <p class="lede">{{ page.dek }}</p>
+</section>
+
+{% assign lang = page.lang %}
+{% assign topic_names = site.guides | where: "lang", lang | map: "topic" | uniq %}
+<ol class="topics">
+  {% for topic in topic_names %}
+    {% assign topic_guides = site.guides | where: "topic", topic | where: "lang", lang | sort: "order" %}
+    {% assign first_guide = topic_guides | first %}
+  <li class="topic-card">
+    <div class="rail"><span class="node"></span></div>
+    <a class="entry" href="{{ first_guide.url | relative_url }}">
+      <span class="hash">{{ first_guide.topic }}</span>
+      <h3>{{ first_guide.topic_title }}</h3>
+      <p>{{ first_guide.topic_dek }}</p>
+      <div class="tags">
+        <span class="tag">{{ topic_guides | size }} {% if lang == "en" %}{% if topic_guides.size == 1 %}step{% else %}steps{% endif %}{% else %}{% if topic_guides.size == 1 %}krok{% else %}kroków{% endif %}{% endif %}</span>
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ol>

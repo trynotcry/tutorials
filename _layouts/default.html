@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'pl' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} · {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ page.dek | default: site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body{% if page.lang %} data-lang="{{ page.lang }}"{% endif %}>
+  <header class="site-header">
+    <div class="inner">
+      <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+      {% if page.lang %}
+        {% if page.lang == "pl" %}
+          {% assign pl_url = page.url %}
+          {% if page.topic %}
+            {% assign en_match = site.guides | where: "topic", page.topic | where: "id", page.id | where_exp: "item", "item.lang == 'en'" | first %}
+          {% endif %}
+          {% assign en_url = en_match.url | default: "/en/" %}
+        {% else %}
+          {% assign en_url = page.url %}
+          {% if page.topic %}
+            {% assign pl_match = site.guides | where: "topic", page.topic | where: "id", page.id | where_exp: "item", "item.lang == 'pl'" | first %}
+          {% endif %}
+          {% assign pl_url = pl_match.url | default: "/pl/" %}
+        {% endif %}
+        <nav>
+          <a href="{{ pl_url | relative_url }}" class="lang-pill{% if page.lang == 'pl' %} active{% endif %}">PL</a>
+          <a href="{{ en_url | relative_url }}" class="lang-pill{% if page.lang == 'en' %} active{% endif %}">EN</a>
+        </nav>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if page.lang %}
+  <div class="shell">
+    <details class="sidenav-wrap" open>
+      <summary>{% if page.lang == "en" %}Contents{% else %}Spis treści{% endif %} <span class="chev">▾</span></summary>
+      {% include nav.html %}
+    </details>
+    <div class="content-col">
+      {{ content }}
+    </div>
+  </div>
+  {% else %}
+    {{ content }}
+  {% endif %}
+
+  <footer class="site-footer">
+    {% if page.lang == "en" %}Step-by-step, practical guides.{% else %}Praktyczne poradniki, krok po kroku.{% endif %}
+  </footer>
+
+  <script src="{{ '/assets/js/lang.js' | relative_url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+title: "Dwa konta GitHub, jeden komputer"
+description: "Instrukcja krok po kroku: jak skonfigurować git i SSH tak, by push trafiał na właściwe konto GitHub w zależności od katalogu."
+baseurl: "/tutorials" # jeśli publikujesz pod https://user.github.io/repo/ ustaw tu "/repo"
+url: "https://trynotcry.github.io/tutorials/"     # np. "https://user.github.io"
+
+# --- To jest serce automatyzacji ---
+# Każdy plik .md wrzucony do folderu _guides/ jest automatycznie
+# odczytany, zamieniony w podstronę i doklejony do listy na stronie głównej.
+# Nie trzeba nigdzie ręcznie dopisywać nowych stron.
+collections:
+  guides:
+    output: true
+    permalink: /:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "guides"
+    values:
+      layout: "guide"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md

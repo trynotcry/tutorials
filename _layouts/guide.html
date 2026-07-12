@@ -1,0 +1,37 @@
+---
+layout: default
+---
+{% assign siblings = site.guides | where: "topic", page.topic | where: "lang", page.lang | sort: "order" %}
+{% assign idx = 0 %}
+{% for g in siblings %}{% if g.url == page.url %}{% assign idx = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev = nil %}
+{% assign next = nil %}
+{% if idx > 0 %}{% assign prev_idx = idx | minus: 1 %}{% assign prev = siblings[prev_idx] %}{% endif %}
+{% assign next_idx = idx | plus: 1 %}
+{% if next_idx < siblings.size %}{% assign next = siblings[next_idx] %}{% endif %}
+
+<article class="guide">
+  <p class="crumbs">
+    <a href="{{ ('/' | append: page.lang | append: '/') | relative_url }}">{{ page.topic_title }}</a>
+    {% if page.lang == "en" %} · step {{ idx | plus: 1 }} of {{ siblings.size }}{% else %} · krok {{ idx | plus: 1 }} z {{ siblings.size }}{% endif %}
+  </p>
+  <h1>{{ page.title }}</h1>
+  {% if page.dek %}<p class="dek">{{ page.dek }}</p>{% endif %}
+
+  {{ content }}
+
+  <div class="pager">
+    <div class="prev">
+      {% if prev %}
+        <span class="dir">{% if page.lang == "en" %}&larr; previous{% else %}&larr; poprzedni krok{% endif %}</span>
+        <a href="{{ prev.url | relative_url }}">{{ prev.title }}</a>
+      {% endif %}
+    </div>
+    <div class="next">
+      {% if next %}
+        <span class="dir">{% if page.lang == "en" %}next &rarr;{% else %}następny krok &rarr;{% endif %}</span>
+        <a href="{{ next.url | relative_url }}">{{ next.title }}</a>
+      {% endif %}
+    </div>
+  </div>
+</article>

@@ -1,0 +1,27 @@
+---
+layout: default
+---
+<section class="hero picker">
+  <div class="eyebrow">tutorial</div>
+  <h1>Wybierz język<br><span class="picker-sep">/</span> Choose a language</h1>
+  <div class="picker-choices">
+    <a class="picker-choice" href="{{ '/pl/' | relative_url }}">
+      <span class="picker-flag">PL</span>
+      <span>Polski</span>
+    </a>
+    <a class="picker-choice" href="{{ '/en/' | relative_url }}">
+      <span class="picker-flag">EN</span>
+      <span>English</span>
+    </a>
+  </div>
+</section>
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem("tutorial-lang");
+      if (saved === "pl" || saved === "en") {
+        window.location.replace("{{ '/' | relative_url }}" + saved + "/");
+      }
+    } catch (e) {}
+  })();
+</script>
