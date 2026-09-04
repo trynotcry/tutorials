@@ -25,6 +25,8 @@ You can set a passphrase during generation (recommended) — see the section bel
 
 Add the contents of `id_ed25519_user1.pub` and `id_ed25519_user2.pub` under **Settings → SSH and GPG keys** on the matching GitHub accounts — each key on a different account.
 
+> The key file name (`id_ed25519_user1`) and the "Title" label when adding it to GitHub are entirely up to you — just descriptions for your own benefit. What must match exactly is the public key contents (the whole `.pub` file, untruncated) and which **account** you add it to. More on what's arbitrary vs. exact in the "How it works" step.
+
 ## 3. Wire the keys into `.gitconfig-userX`
 
 This is the file you created in step 1 of the tutorial. Now you add a `[core]` section to it pointing at a specific key.

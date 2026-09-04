@@ -29,6 +29,8 @@ cat ~/.ssh/id_ed25519_user1.pub | pbcopy
 
 Paste it under **Settings → SSH and GPG keys** on the `user1` account. Repeat for `user2`.
 
+> The key file name and the "Title" label on GitHub are arbitrary — just descriptions for you. What must match exactly is the public key contents and which account you add it to. More in the "How it works" step.
+
 ## 3. Wire the keys into `.gitconfig-userX`
 
 This is the file you created in step 1 of the tutorial (in your home directory, `~`, e.g. `/Users/yourname/.gitconfig-user1`). Now you add a `[core]` section to it pointing at a specific key.

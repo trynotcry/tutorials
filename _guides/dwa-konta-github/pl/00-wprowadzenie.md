@@ -39,4 +39,24 @@ Mechanizm składa się z trzech warstw:
 
 Efekt: wchodzisz do katalogu, robisz `git push`, a Git po cichu bierze właściwy klucz i właściwą tożsamość — automatycznie.
 
+## Które nazwy możesz wymyślić sam, a które muszą się zgadzać co do litery
+
+To częste źródło pomyłek, więc rozdzielmy to raz na zawsze. W tym tutorialu pojawia się sporo nazw — część z nich to **Twoje własne, dowolne skróty**, a część **musi dokładnie odpowiadać temu, co jest na GitHubie**. Pomylenie tych dwóch kategorii to jedna z najczęstszych przyczyn, dla których setup "prawie działa".
+
+**Dowolne — wymyślasz sam, ważna jest tylko spójność między krokami:**
+- nazwy folderów projektów (`D:\Projekty\user1`, `~/Praca/klient-a` — cokolwiek Ci pasuje),
+- nazwy plików kluczy SSH (`id_ed25519_user1` — równie dobrze może być `id_ed25519_firma` albo `klucz_klienta_a`),
+- nazwy plików configu (`.gitconfig-user1` — może być `.gitconfig-praca`),
+- etykieta klucza przy dodawaniu go na GitHubie (pole "Title" w Settings → SSH keys — to czysto opisowa nazwa dla Ciebie, GitHub jej nie waliduje).
+
+Jedyny wymóg: gdziekolwiek w configu odwołujesz się do nazwy pliku klucza czy configu, musi to być **dokładnie ta sama nazwa**, jakiej użyłeś przy tworzeniu pliku — łącznie z wielkością liter.
+
+**Musi się zgadzać dokładnie z GitHubem:**
+- **nazwa konta/organizacji w URL-u remote** (`git@github.com:TU_DOKŁADNA_NAZWA/repo.git`) — to, co widzisz w adresie swojego profilu na GitHubie,
+- **nazwa repozytorium** w tym samym URL-u,
+- **treść klucza publicznego** wklejana na GitHub (musi być całym, nieuciętym plikiem `.pub`, bez dodatkowych spacji czy złamań linii),
+- `user.email` w `.gitconfig-userX` **nie musi** być identyczny z niczym technicznie (Git go nie sprawdza), ale warto żeby pasował do adresu przypisanego do konta na GitHubie — inaczej commity mogą nie łączyć się poprawnie z Twoim profilem na liście autorów.
+
+> W praktyce: jeśli coś "nie działa", a wszystkie kroki wykonałeś poprawnie — najpierw sprawdź literówki właśnie w tych dwóch punktach z drugiej listy. Reszta nazw jest tylko dla Twojej wygody i nigdy nie jest przyczyną błędu.
+
 > Kolejne strony pokazują to krok po kroku dla Windows, macOS i Linuksa. Kroki 1–2 (generowanie kluczy, konfiguracja gitconfig) są takie same na każdym systemie — różni się tylko lokalizacja plików i sposób uruchamiania agenta SSH.

@@ -25,6 +25,8 @@ Podczas generowania możesz ustawić passphrase (zalecane) — obsługę tego, �
 
 Zawartość plików `id_ed25519_user1.pub` i `id_ed25519_user2.pub` dodaj w **Settings → SSH and GPG keys** na odpowiednich kontach GitHub — każdy klucz do innego konta.
 
+> Nazwa pliku klucza (`id_ed25519_user1`) i etykieta "Title" przy dodawaniu na GitHubie są całkowicie dowolne — to tylko opisy dla Ciebie. Musi się za to zgadzać dokładnie zawartość klucza publicznego (cały plik `.pub`, bez ucięć) oraz to, na które **konto** go dodajesz. Więcej o tym, co jest dowolne, a co musi się zgadzać — w kroku "Jak to działa".
+
 ## 3. Podepnij klucze w `.gitconfig-userX`
 
 To plik, który utworzyłeś w kroku 1 tutoriala. Teraz dopisujesz do niego sekcję `[core]` wskazującą na konkretny klucz.

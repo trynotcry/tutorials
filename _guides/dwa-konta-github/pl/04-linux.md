@@ -25,6 +25,8 @@ cat ~/.ssh/id_ed25519_user1.pub
 
 Skopiuj wynik i wklej w **Settings → SSH and GPG keys** na koncie `user1`. Powtórz dla `user2`. (Jeśli masz `xclip`: `xclip -sel clip < ~/.ssh/id_ed25519_user1.pub`)
 
+> Nazwa pliku klucza i etykieta "Title" na GitHubie są dowolne. Musi się za to zgadzać dokładnie zawartość klucza publicznego oraz konto, na które go dodajesz. Więcej w kroku "Jak to działa".
+
 ## 3. Podepnij klucze w `.gitconfig-userX`
 
 To plik, który utworzyłeś w kroku 1 tutoriala (np. `~/.gitconfig-user1`). Teraz dopisujesz do niego sekcję `[core]` wskazującą na konkretny klucz.

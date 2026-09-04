@@ -39,4 +39,24 @@ The mechanism has three layers:
 
 End result: you `cd` into a folder, run `git push`, and Git silently picks the right key and the right identity — automatically.
 
+## Which names you can make up, and which must match GitHub exactly
+
+This is a common source of confusion, so let's settle it once. This tutorial involves quite a few names — some are **your own, arbitrary labels**, and some **must match GitHub exactly**. Mixing up these two categories is one of the most common reasons the setup "almost works".
+
+**Arbitrary — you choose these, the only rule is staying consistent across steps:**
+- project folder names (`D:\Projects\user1`, `~/Work/client-a` — whatever suits you),
+- SSH key file names (`id_ed25519_user1` — could just as well be `id_ed25519_company` or `client_a_key`),
+- config file names (`.gitconfig-user1` — could be `.gitconfig-work`),
+- the key's label on GitHub (the "Title" field under Settings → SSH keys — purely descriptive, GitHub doesn't validate it against anything).
+
+The only requirement: wherever a config references a key or config file name, it must be **exactly the name** you used when you created that file — including case.
+
+**Must match GitHub exactly:**
+- **the account/organization name in the remote URL** (`git@github.com:YOUR_EXACT_NAME/repo.git`) — the one you see in your GitHub profile's address,
+- **the repository name** in that same URL,
+- **the public key contents** pasted into GitHub (must be the whole, untruncated `.pub` file, with no extra spaces or line breaks),
+- `user.email` in `.gitconfig-userX` — Git itself doesn't validate this against anything, but it's worth matching the address associated with the GitHub account, otherwise commits may not link up correctly with your profile in the contributors list.
+
+> In practice: if something "doesn't work" even though you followed every step, check for typos in that second list first. Every other name is just for your own convenience and is never the cause of a bug.
+
 > The following pages walk through this step by step for Windows, macOS, and Linux. Steps 1–2 (generating keys, configuring gitconfig) are identical on every system — only file locations and how you run the SSH agent differ.
