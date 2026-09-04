@@ -27,12 +27,47 @@ Zawartość plików `id_ed25519_user1.pub` i `id_ed25519_user2.pub` dodaj w **Se
 
 ## 3. Podepnij klucze w `.gitconfig-userX`
 
-Zgodnie z krokiem 1 tutoriala, w `core.sshCommand` podaj pełną ścieżkę Windows ze slashami `/`:
+To plik, który utworzyłeś w kroku 1 tutoriala. Teraz dopisujesz do niego sekcję `[core]` wskazującą na konkretny klucz.
+
+**Znajdź swoją nazwę użytkownika Windows** (będzie potrzebna w ścieżkach):
+
+```powershell
+echo $env:USERNAME
+```
+
+**Otwórz plik w Notatniku** (podmień `TWOJANAZWA` na wynik z komendy wyżej):
+
+```powershell
+notepad C:\Users\TWOJANAZWA\.gitconfig-user1
+```
+
+Jeśli Notatnik zapyta "czy chcesz utworzyć nowy plik?" — to znaczy, że plik jeszcze nie istnieje; zgódź się, to normalne. Jeśli już istnieje z kroku 1 (z sekcją `[user]`), Notatnik go po prostu otworzy z istniejącą zawartością.
+
+**Cały plik powinien wyglądać tak** (jeśli sekcja `[user]` już tam jest, dopisz tylko brakującą część `[core]` pod spodem — nie kasuj `[user]`):
 
 ```ini
+[user]
+    name = User1
+    email = user1@example.com
 [core]
     sshCommand = "ssh -i C:/Users/TWOJANAZWA/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes"
 ```
+
+Zapisz plik (Ctrl+S) i zamknij Notatnik. Powtórz identycznie dla `.gitconfig-user2`, podmieniając `user1` na `user2` w obu miejscach (nazwa pliku i ścieżka do klucza w `sshCommand`).
+
+**Alternatywa bez otwierania edytora** — dopisanie sekcji od razu z terminala (PowerShell):
+
+```powershell
+Add-Content "C:\Users\TWOJANAZWA\.gitconfig-user1" "`n[core]`n    sshCommand = `"ssh -i C:/Users/TWOJANAZWA/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes`""
+```
+
+To dopisze sekcję `[core]` na końcu pliku, nie ruszając tego, co już tam jest. Sprawdź efekt:
+
+```powershell
+type C:\Users\TWOJANAZWA\.gitconfig-user1
+```
+
+Powinieneś zobaczyć obie sekcje, `[user]` i `[core]`, jedna pod drugą.
 
 ## 4. Zmień remote repozytorium na SSH
 

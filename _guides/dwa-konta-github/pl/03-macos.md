@@ -31,10 +31,42 @@ Wklej zawartość w **Settings → SSH and GPG keys** na koncie `user1`. Powtór
 
 ## 3. Podepnij klucze w `.gitconfig-userX`
 
+To plik, który utworzyłeś w kroku 1 tutoriala (w katalogu domowym, czyli `~`, np. `/Users/twojanazwa/.gitconfig-user1`). Teraz dopisujesz do niego sekcję `[core]` wskazującą na konkretny klucz.
+
+**Otwórz plik w edytorze terminalowym `nano`** (prostszy niż `vim` dla początkujących):
+
+```bash
+nano ~/.gitconfig-user1
+```
+
+Jeśli plik już istnieje z kroku 1 (z sekcją `[user]`), zobaczysz jego zawartość. Strzałkami zjedź na koniec pliku i dopisz nową sekcję. **Cały plik powinien wyglądać tak:**
+
 ```ini
+[user]
+    name = User1
+    email = user1@example.com
 [core]
     sshCommand = "ssh -i ~/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes"
 ```
+
+Zapisz i wyjdź z `nano`: **Ctrl+O** (zapisz), Enter (zatwierdź nazwę pliku), **Ctrl+X** (wyjdź). Powtórz identycznie dla `.gitconfig-user2`, podmieniając `user1` na `user2` w obu miejscach (nazwa pliku i ścieżka do klucza w `sshCommand`).
+
+**Alternatywa bez otwierania edytora** — dopisanie sekcji od razu z terminala:
+
+```bash
+cat >> ~/.gitconfig-user1 << 'EOF'
+[core]
+    sshCommand = "ssh -i ~/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes"
+EOF
+```
+
+To dopisze sekcję `[core]` na końcu pliku, nie ruszając tego, co już tam jest. Sprawdź efekt:
+
+```bash
+cat ~/.gitconfig-user1
+```
+
+Powinieneś zobaczyć obie sekcje, `[user]` i `[core]`, jedna pod drugą.
 
 Ścieżki z `~` zwykle działają poprawnie w `core.sshCommand` na macOS/Linuksie (w przeciwieństwie do Windows, gdzie bezpieczniej jest podać pełną ścieżkę).
 

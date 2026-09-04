@@ -27,12 +27,47 @@ Add the contents of `id_ed25519_user1.pub` and `id_ed25519_user2.pub` under **Se
 
 ## 3. Wire the keys into `.gitconfig-userX`
 
-As in step 1 of the tutorial, give `core.sshCommand` the full Windows path with slashes:
+This is the file you created in step 1 of the tutorial. Now you add a `[core]` section to it pointing at a specific key.
+
+**Find your Windows username** (you'll need it in the paths below):
+
+```powershell
+echo $env:USERNAME
+```
+
+**Open the file in Notepad** (replace `YOURNAME` with the result above):
+
+```powershell
+notepad C:\Users\YOURNAME\.gitconfig-user1
+```
+
+If Notepad asks "do you want to create a new file?" — that means the file doesn't exist yet; say yes, that's normal. If it already exists from step 1 (with a `[user]` section), Notepad will just open it with the existing content.
+
+**The whole file should look like this** (if `[user]` is already there, just add the missing `[core]` part below it — don't delete `[user]`):
 
 ```ini
+[user]
+    name = User1
+    email = user1@example.com
 [core]
     sshCommand = "ssh -i C:/Users/YOURNAME/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes"
 ```
+
+Save the file (Ctrl+S) and close Notepad. Repeat the same for `.gitconfig-user2`, swapping `user1` for `user2` in both places (the file name and the key path inside `sshCommand`).
+
+**Alternative without opening an editor** — append the section directly from the terminal (PowerShell):
+
+```powershell
+Add-Content "C:\Users\YOURNAME\.gitconfig-user1" "`n[core]`n    sshCommand = `"ssh -i C:/Users/YOURNAME/.ssh/id_ed25519_user1 -o IdentitiesOnly=yes`""
+```
+
+This appends the `[core]` section to the end of the file without touching what's already there. Verify:
+
+```powershell
+type C:\Users\YOURNAME\.gitconfig-user1
+```
+
+You should see both the `[user]` and `[core]` sections, one after the other.
 
 ## 4. Switch the repository remote to SSH
 
